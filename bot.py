@@ -16,7 +16,6 @@ function_color = 0xE7E874
 async def on_ready():
     print("Let's win this one")
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Your IP Address"))
-    print(TOKEN)
 
 @client.command()
 @commands.is_owner()
@@ -29,4 +28,5 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
+print(TOKEN)
 client.run(TOKEN)
