@@ -6,6 +6,7 @@ import random
 import asyncio
 import wonderwords
 import os
+import re
 
 exception_color = 0x90D9CD
 utility_color = 0xD97B88
@@ -120,28 +121,36 @@ class Basic(commands.Cog):
     @commands.command()
     async def typerace(self, ctx):
         try:
-            sentence = wonderwords.RandomSentence().sentence()
-            await ctx.send(sentence)
+            emojified = ''
 
-            image = Image.open('Typerace.jpg')
-            draw = ImageDraw.Draw(image)
-            font = ImageFont.truetype('arial.ttf', 100)
-            draw.text((50, 10), sentence, font=font, fill=(222, 222, 222))
-            image.save("to_send.jpg")
+            sentence = wonderwords.RandomSentence().sentence()
+            length = len(sentence.split())
+            formatted = re.sub(r'[^A-Za-z ]+', "", sentence).lower()
             
-            sent = await ctx.send(file = discord.File("to_send.jpg"))
-            os.remove("to_send.jpg")
+            for i in formatted:
+                if i == ' ':
+                    emojified += '   '
+                else:
+                    emojified += ':regional_indicator_{}: '.format(i)
+            sent = await ctx.send(f"{emojified}.")
 
             def check(msg):
-                return msg.content == sentence
+                return msg.content.lower() == sentence.lower()
             try:
-                s = await self.client.wait_for('message', timeout=180.0, check=check)
+                s = await self.client.wait_for('message', timeout=60.0, check=check)
             except asyncio.TimeoutError:
                 await ctx.send(embed = discord.Embed(description = "No one answered in time.", color = exception_color))
             else:
-                time = str(sent.created_at - ctx.message.created_at)
-                time_format = time[5:][:-5]
-                complete = await ctx.send(embed = discord.Embed(description = f"{s.author.mention} Completed the typerace in {time_format} seconds.", color=function_color))
+                
+                time =  str(datetime.datetime.utcnow() - sent.created_at)
+                time_format = time[:-5][5:]
+                if time_format[0] == '0':
+                    time_format = time_format[1:]
+                
+                embed = discord.Embed(description = f"{s.author.mention} Completed the typerace in **{time_format}** seconds.", color=function_color)
+                time_in_mins = float(time_format)/60
+                embed.add_field(name = "Net Speed", value = int(length/time_in_mins))
+                await ctx.send(embed = embed)
                     
         except Exception as e:
             await ctx.send(e)
