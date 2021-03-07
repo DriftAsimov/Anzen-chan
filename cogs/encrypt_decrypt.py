@@ -45,7 +45,9 @@ class Encryption(commands.Cog):
     async def lang(self, ctx, *, arg):
         translator = Translator()
         trs = translator.translate(arg, dest="en")
+        detected = translator.detect(arg)
         embed = discord.Embed(title = "Here is your translated text", description = trs.text, color = function_color)
+        embed.set_footer(text = f"Translated from {detected.lang} to en.")
         await ctx.send(embed = embed)
 
 def setup(client):
