@@ -34,6 +34,7 @@ class Basic(commands.Cog):
             embed.add_field(name = "save", value = "Saves a piece of string")
             embed.add_field(name = "getmsg", value = "Shows a saved message")
             embed.add_field(name = "typerace", value = "Starts a typerace")
+            embed.add_field(name = "lang", value = "Translate text from any language to english.")
             
             embed.add_field(name = "ping", value = "Shows the ping latency of the bot")
             embed.add_field(name = "info", value = "Shows info about me")
@@ -79,6 +80,10 @@ class Basic(commands.Cog):
         elif category == "getmsg":
             embed = discord.Embed(description = "Shows a saved message", color = utility_color)
             embed.add_field(name = "Usage", value = "```::getmsg [akey](previousely saved key)```")
+            await ctx.send(embed = embed)
+        elif category == "lang":
+            embed = discord.Embed(description = "Translate text from any language to english.", color = utility_color)
+            embed.add_field(name = "Usage", value = "```::lang [string to translate](ohayo gozaimasu)```")
             await ctx.send(embed = embed)
         elif category == "typerace":
             embed = discord.Embed(description = "Starts a typerace", color = utility_color)
