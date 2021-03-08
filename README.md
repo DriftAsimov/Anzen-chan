@@ -24,13 +24,13 @@ The bot delivers a lot of functionalities which can spice up your cryptography e
 The bot is as easy to use as using a hairdryer, just invite it to a guild and type `::help` and the bot will guide you further
 
 ## FAQs
-**Q:** Is it public to use?
+**Q:** Is it public to use?\
 **A:** Yes it can be used publically.
 
-**Q:** Is the bot malware-free?
+**Q:** Is the bot malware-free?\
 **A:** We never provide stuff containing any kind of malware
 
-**Q:** What's the bot written is?
+**Q:** What's the bot written is?\
 **A:** The bot is written using Python `v.3.8.5` with `discord.py == 1.6.0`
 
 ## Contact Us
