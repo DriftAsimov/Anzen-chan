@@ -30,7 +30,7 @@ The bot is as easy to use as using a hairdryer, just invite it to a guild and ty
 **Q:** Is the bot malware-free?\
 **A:** We never provide stuff containing any kind of malware
 
-**Q:** What's the bot written is?\
+**Q:** What's the bot written in?\
 **A:** The bot is written using Python `v.3.8.5` with `discord.py == 1.6.0`
 
 ## Contact Us
