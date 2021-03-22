@@ -4,6 +4,7 @@ import random
 import asyncio
 import datetime
 import os
+import jishaku
 
 client = commands.Bot(command_prefix="::",intents = discord.Intents.all(), case_insensitive = True, help_command=None)
 TOKEN = os.environ["TOKEN"]
@@ -28,4 +29,5 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
+client.load_extension('jishaku')
 client.run(TOKEN)
